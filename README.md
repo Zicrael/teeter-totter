@@ -1,2 +1,14 @@
 # teeter-totter
-Teeter Totter game
+
+Teeter Totter game.
+
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
