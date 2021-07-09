@@ -1,11 +1,13 @@
 <template>
   <div class='game-wrapper'>
-      <canvas ref="game"></canvas>
+    <canvas ref="game"></canvas>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapMutations } from 'vuex';
+import InputHandler from "../classes/InputHandler.js";
+import Totter from "../classes/Totter.js";
 
 export default {
   name: 'Game',
@@ -19,12 +21,18 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'ctx'
+      'ctx',
+      'gameState',
+      'totter',
+      'playerItems',
+      'enemyItems'
     ])
   },
   methods: {
     ...mapMutations([
-      'setContext'
+      'setContext',
+      'changeGameState',
+      'changeTotter'
     ]),
     initGame() {
       const canvas = this.$refs.game;
@@ -32,6 +40,8 @@ export default {
       canvas.width = this.width;
       canvas.height = this.height;
       this.lastTime = 0;
+      new InputHandler(this);
+      this.changeTotter(new Totter(this));
       requestAnimationFrame(this.gameLoop);
     },
     gameLoop(timestamp) {
@@ -43,17 +53,27 @@ export default {
         requestAnimationFrame(this.gameLoop);
     },
     update() {
-      // detect if player fails.
+      const gameFail = false;
+      if (gameFail) {
+        // if totter fall
+        this.changeGameState(this.$mapState.gameover);
+      } else if (this.gameState !== this.$mapState.playing) {
+        // if paused or menu
+        return null;
+      } else {
+        // this.totter.rect.d = this.totter.rect.d + 1;
+        // console.log("update!")
+        // update game
+      }
     },
-    draw(ctx) {
-      // test
-      ctx.rect(0,0, this.width, this.height);
-      ctx.fillStyle = "rgba(255,255,255,1)";
-      ctx.fill();
-      ctx.font = "32px Arial";
-      ctx.fillStyle = "#000";
-      ctx.textAlign = "center";
-      ctx.fillText("Press spacebar to start", this.width / 2, this.height / 2);
+    draw() {
+      if (this.gameState === this.$mapState.menu) {
+        // dont draw if on menu
+        return null;
+      } else {
+        const objects = [this.totter, ...this.playerItems, ...this.enemyItems];
+        objects.forEach(object => object.draw(this.ctx));
+      }
     },
   },
   mounted () {

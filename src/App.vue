@@ -1,21 +1,26 @@
 <template>
   <div id="app">
     <Game/>
+    <Menu/>
+    <Pause/>
   </div>
 </template>
-
 <script>
 import Game from './components/Game.vue'
+import Menu from './components/Menu.vue'
+import Pause from './components/Pause.vue'
 
 export default {
   name: 'App',
   components: {
-    Game
-  }
+    Game,
+    Menu,
+    Pause
+  },
 }
 </script>
-<style>
-html, body {
+<style lang="scss">
+html, body, #app {
   width: 100%;
   height: 100%;
   margin: 0px;
@@ -34,9 +39,19 @@ html, body {
   justify-content: center;
 }
 canvas {
-  border: 1px solid #000;
+  border: 10px solid #000;
 }
-img {
+.menu-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  font-family: cursive;
+}
+img:not(.menu-gif) {
   display: none;
 }
 </style>
