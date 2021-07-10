@@ -137,6 +137,9 @@ export default {
       }
       // calc figure size
       figure.size = Math.floor((column.width - 60) / 10) * figure.weight + 60;
+      if (figure.size > 160) {
+        figure.size = 160;
+      }
       // calc position
       figure.position = {
         x: column.center - (figure.size / 2),
