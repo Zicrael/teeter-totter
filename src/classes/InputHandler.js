@@ -21,29 +21,55 @@ export default class InputHandler {
           break;
       }
     });
+    document.addEventListener("keyup", event => {
+      switch(event.key) {
+        case "ArrowDown":
+          this.handleDownKeyup();
+          break;
+      }
+    });
   }
   handleLeft() {
-
+    if (this.store.getters.turn === "player") {
+      this.store.getters.activeFigure.moveLeft();
+    }
   }
   handleRight() {
-
+    if (this.store.getters.turn === "player") {
+      this.store.getters.activeFigure.moveRight();
+    }
   }
   handleDown() {
-
+    if (this.store.getters.turn === "player") {
+      this.store.getters.activeFigure.fastMode(true);
+    }
+  }
+  handleDownKeyup() {
+    if (this.store.getters.turn === "player") {
+      this.store.getters.activeFigure.fastMode(false);
+    }
   }
   handleEnter() {
     const gameState = this.store.getters.gameState;
-    // prevent handling if play
     if (gameState === this.mapState.playing) {
+      // prevent handling if play
       return null;
     }
-    // if menu
     if (gameState === this.mapState.menu) {
+      // if menu
       this.store.commit("changeGameState", this.mapState.playing);
     }
-    // if paused
     if (gameState === this.mapState.paused) {
+      // if paused
       this.store.commit("changeGameState", this.mapState.playing);
+    }
+    if (gameState === this.mapState.gameover) {
+      // if gameover
+      location.reload();
+    }
+    if (gameState === this.mapState.gamewin) {
+      // if gamewin
+      location.reload();
     }
   }
   handleEscape() {

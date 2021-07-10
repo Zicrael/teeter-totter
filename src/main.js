@@ -8,7 +8,8 @@ Vue.prototype.$mapState = {
   menu: 0,
   playing: 1,
   paused: 2,
-  gameover: 3
+  gameover: 3,
+  gamewin: 4
 };
 Vue.prototype.$width = window.innerWidth;
 Vue.prototype.$height = window.innerHeight;

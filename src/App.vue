@@ -3,19 +3,25 @@
     <Game/>
     <Menu/>
     <Pause/>
+    <GameOver/>
+    <GameWin/>
   </div>
 </template>
 <script>
 import Game from './components/Game.vue'
 import Menu from './components/Menu.vue'
 import Pause from './components/Pause.vue'
+import GameOver from './components/GameOver.vue'
+import GameWin from './components/GameWin.vue'
 
 export default {
   name: 'App',
   components: {
     Game,
     Menu,
-    Pause
+    Pause,
+    GameOver,
+    GameWin
   },
 }
 </script>

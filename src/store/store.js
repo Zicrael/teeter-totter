@@ -7,9 +7,20 @@ export const store = new Vuex.Store({
   state: {
     ctx: null,
     gameState: 0,
+    gameSpeed: 1,
     totter: {},
-    playerItems: [],
-    enemyItems: []
+    playerField: [],
+    enemyField: [],
+    playerStats: {
+      weight: 0,
+      impact: 0
+    },
+    enemyStats: {
+      weight: 0,
+      impact: 0
+    },
+    activeFigure: null,
+    turn: "player"
   },
   getters: {
     ctx(state) {
@@ -18,14 +29,29 @@ export const store = new Vuex.Store({
     gameState(state) {
       return state.gameState;
     },
+    gameSpeed(state) {
+      return state.gameSpeed;
+    },
     totter(state) {
       return state.totter;
     },
-    playerItems(state) {
-      return state.playerItems;
+    playerField(state) {
+      return state.playerField;
     },
-    enemyItems(state) {
-      return state.enemyItems;
+    enemyField(state) {
+      return state.enemyField;
+    },
+    playerStats(state) {
+      return state.playerStats;
+    },
+    enemyStats(state) {
+      return state.enemyStats;
+    },
+    activeFigure(state) {
+      return state.activeFigure;
+    },
+    turn(state) {
+      return state.turn;
     }
   },
   mutations: {
@@ -35,14 +61,29 @@ export const store = new Vuex.Store({
     changeGameState(state, value) {
       state.gameState = value;
     },
+    changeGameSpeed(state, value) {
+      state.gameSpeed = value;
+    },
     changeTotter(state, totter) {
       state.totter = totter;
     },
-    changePlayerItems(state, array) {
-      state.playerItems = array;
+    changePlayerField(state, field) {
+      state.playerField = field;
     },
-    changeEnemyItems(state, array) {
-      state.enemyItems = array;
+    changeEnemyField(state, field) {
+      state.enemyField = field;
+    },
+    changePlayerStats(state, stats) {
+      state.playerStats = stats;
+    },
+    changeEnemyStats(state, stats) {
+      state.enemyStats = stats;
+    },
+    changeActiveFigure(state, figure) {
+      state.activeFigure = figure;
+    },
+    changeTurn(state, turn) {
+      state.turn = turn;
     }
-  },
+  }
 })
